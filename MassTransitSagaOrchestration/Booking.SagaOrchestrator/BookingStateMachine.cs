@@ -42,6 +42,7 @@ namespace Booking.SagaOrchestrator
                         context.Instance.FirstName = context.Data.FirstName;
                         context.Instance.LastName = context.Data.LastName;
                     })
+                    .ThenAsync(context => Console.Out.WriteLineAsync($"Receive IBookingCreateOrderCommand message with order Id: {context.Data.OrderId}"))
                     .TransitionTo(AwaitingFlightDateConfirmedState)
                     .PublishAsync(async context => await context.Init<IFlightDateRequestCommand>(new
                     {
@@ -53,6 +54,7 @@ namespace Booking.SagaOrchestrator
             During(AwaitingFlightDateConfirmedState,
                 When(FlightDateConfirmedEvent)
                     .Then(context => context.Instance.FlightDate = context.Data.FlightDate)
+                    .ThenAsync(context => Console.Out.WriteLineAsync($"Receive IFlightDateConfirmedEvent message with order Id: {context.Data.OrderId}"))
                     .TransitionTo(AwaitingHotelDateConfirmedState)
                     .PublishAsync(async context => await context.Init<IHotelDateRequestCommand>(new
                     {
@@ -64,6 +66,7 @@ namespace Booking.SagaOrchestrator
             During(AwaitingHotelDateConfirmedState,
                 When(HotelDateConfirmedEvent)
                     .Then(context => context.Instance.HotelDate = context.Data.HotelDate)
+                    .ThenAsync(context => Console.Out.WriteLineAsync($"Receive IHotelDateConfirmedEvent message with order Id: {context.Data.OrderId}"))
                     .Finalize());
 
             //  uncomment this line, if we need to remove complete transaction state 
