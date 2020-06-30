@@ -37,6 +37,10 @@ namespace FlightService.WebApi.Consumers
 
             _logger.LogInformation($"Save order with orderId: {message.OrderId} to local storage");
 
+            int delay = 10000;
+            _logger.LogInformation($"Delay {delay} ms");
+            await Task.Delay(delay);
+
             await _publishEndpoint.Publish<IFlightDateConfirmedEvent>(new
             {
                 CorrelationId = context.Message.CorrelationId,

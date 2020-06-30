@@ -37,11 +37,15 @@ namespace HotelService.WebApi.Consumers
 
             _logger.LogInformation($"Save order with orderId: {message.OrderId} to local storage");
 
+            int delay = 10000;
+            _logger.LogInformation($"Delay {delay} ms");
+            await Task.Delay(delay);
+
             await _publishEndpoint.Publish<IHotelDateConfirmedEvent>(new
             {
                 CorrelationId = context.Message.CorrelationId,
                 OrderId = context.Message.OrderId,
-                FligHotelDatehtDate = hotel.HotelDate
+                HotelDate = hotel.HotelDate
             });
 
             _logger.LogInformation($"Publish IHotelDateConfirmedEvent with orderId: {message.OrderId}");

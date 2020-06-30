@@ -36,7 +36,8 @@ namespace Booking.WebApi
                 c.IncludeXmlComments(filePath);
             });
 
-            services.AddInMemorySaga(Configuration);
+            // services.AddInMemorySaga(Configuration);
+            services.AddEntityFrameworkSaga(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
