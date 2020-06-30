@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Booking.SagaOrchestrator
 {
-    class MassTransitHostConfiguration
+    public class MassTransitHostConfiguration
     {
         public string RabbitMQAddress { get; set; }
         public string UserName { get; set; }
