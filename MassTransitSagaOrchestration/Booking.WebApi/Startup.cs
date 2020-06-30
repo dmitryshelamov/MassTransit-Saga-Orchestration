@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Booking.SagaOrchestrator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +35,8 @@ namespace Booking.WebApi
                 var filePath = Path.Combine(System.AppContext.BaseDirectory, "Booking.WebApi.xml");
                 c.IncludeXmlComments(filePath);
             });
+
+            services.AddInMemorySaga(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

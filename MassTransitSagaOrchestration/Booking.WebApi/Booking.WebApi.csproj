@@ -10,5 +10,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Booking.SagaOrchestrator\Booking.SagaOrchestrator.csproj" />
+  </ItemGroup>
+
 
 </Project>
